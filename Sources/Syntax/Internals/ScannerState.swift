@@ -174,7 +174,7 @@ final class ScannerState {
 extension ScannerState {
 
     func location(for index: String.Index) -> Location {
-        return lineColumnIndex[text.distance(from: text.startIndex, to: index)]!
+        return lineColumnIndex[text.distance2(from: text.startIndex, to: index)]!
     }
 
 }
@@ -340,8 +340,8 @@ private final class InPlaceStorage: ScannerStateStorage {
     }
 
     func nodeRange(for state: ScannerState) -> Range<Int> {
-        let start = state.text.distance(from: state.text.startIndex, to: state.node.start)
-        let end = state.text.distance(from: state.text.startIndex, to: state.range.lowerBound)
+        let start = state.text.distance2(from: state.text.startIndex, to: state.node.start)
+        let end = state.text.distance2(from: state.text.startIndex, to: state.range.lowerBound)
         return start..<end
     }
 }
@@ -471,8 +471,8 @@ private final class ScanningStorage<T>: ScannerStateStorage, ScanningStorageProt
 
     func nodeRange(for state: ScannerState) -> Range<Int> {
         guard !state.node.children.isEmpty else {
-            let start = state.text.distance(from: state.text.startIndex, to: state.range.lowerBound)
-            let end = state.text.distance(from: state.text.startIndex, to: state.range.upperBound)
+            let start = state.text.distance2(from: state.text.startIndex, to: state.range.lowerBound)
+            let end = state.text.distance2(from: state.text.startIndex, to: state.range.upperBound)
             return start..<end
         }
         let min = state.node.children.map(\.range.lowerBound).min()!

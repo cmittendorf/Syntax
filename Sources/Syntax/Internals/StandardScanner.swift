@@ -120,8 +120,8 @@ extension StandardScanner {
     func syntaxTree() -> SyntaxTree {
         let startIndex = state.node.start
         let endIndex = state.range.lowerBound
-        let startOffset = text.distance(from: text.startIndex, to: startIndex)
-        let endOffset = text.distance(from: text.startIndex, to: endIndex)
+        let startOffset = text.distance2(from: text.startIndex, to: startIndex)
+        let endOffset = text.distance2(from: text.startIndex, to: endIndex)
 
         let syntaxTree = MutableSyntaxTree(range: startOffset..<endOffset,
                                            location: lineColumnIndex[startOffset]!..<lineColumnIndex[endOffset]!,
